@@ -9,16 +9,14 @@
  </div>
  <br><br>
 
- @foreach ($posts as $id => $post)
+ @foreach ($posts as $post)
     <div>
-      <h1><a href="{{ route('posts.show', ['post_id' => $id]) }}">{{ $post['title'] }}</a></h1>
-      <div>Автор: {{ $post['author'] }}</div>
-      <div>Дата: {{ $post['date'] }}</div>
+      <h1><a href="{{ route('posts.show', ['post_id' => $post->id]) }}">{{ $post->title }}</a></h1>
       <br>
-      <p>{{ $post['description'] }}</p>
+      <p>{{ $post->text }}</p>
       <div>
-        <a href="/posts/edit">Редактировать</a>
-        <a href="/posts/delete">Удалить</a>
+        <a href="{{ route('posts.get.update', ['post_id' => $post->id]) }}">Редактировать</a>
+        <a href="{{ route('posts.delete', ['post_id' => $post->id]) }}">Удалить</a>
       </div>
     </div>
     <hr>

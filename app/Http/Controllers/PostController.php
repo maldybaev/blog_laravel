@@ -5,60 +5,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostCreateRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
 
  public function index()
   {
-    $posts = [
-      [
-        'title' => 'Жесткие диски дорожают',
-        'author' => 'Акыл',
-        'date' => '28.05.21',
-        'description' => 'В связи с увеличением популярности новой криптовалюты "Chia", стоимость качественных жестких дисков с большим объемом, растет не по дням а по часам. В странах Юго-восточной Азии уже наблюдается дефицит носителей размером более 8 ГБ'
-      ],
-      [
-        'title' => 'Нефть падает',
-        'author' => 'Иван',
-        'date' => '26.05.21',
-        'description' => 'Цены на нефть на мировых площадках существенно упал. На сегодняшний день баррель нефти стоит на 17 процентов дешевле, чем на этот же период в прошлом году'
-      ],
-      [
-        'title' => 'В Бишкеке ремонтируют дороги',
-        'author' => 'Александр',
-        'date' => '25.05.21',
-        'description' => 'В Бишкеке на некоторых улицах идут ремонтные работы. Бригады дорожного управления поменяют асфальтовое покрытие. Планируется обновление тротуаров прилегающих к ремонтируемым улицам'
-      ]
+    $posts = DB::select('select * from posts');
 
-    ];
     return view('posts.index', ['posts' => $posts]);
   }
 
     public function show($post_id)
   {
-    $posts = [
-      [
-        'title' => 'Жесткие диски дорожают',
-        'author' => 'Акыл',
-        'date' => '28.05.21',
-        'description' => 'В связи с увеличением популярности новой криптовалюты "Chia", стоимость качественных жестких дисков с большим объемом, растет не по дням а по часам. В странах Юго-восточной Азии уже наблюдается дефицит носителей размером более 8 ГБ'
-      ],
-      [
-        'title' => 'Нефть падает',
-        'author' => 'Иван',
-        'date' => '26.05.21',
-        'description' => 'Цены на нефть на мировых площадках существенно упал. На сегодняшний день баррель нефти стоит на 17 процентов дешевле, чем на этот же период в прошлом году'
-      ],
-      [
-        'title' => 'В Бишкеке ремонтируют дороги',
-        'author' => 'Александр',
-        'date' => '25.05.21',
-        'description' => 'В Бишкеке на некоторых улицах идут ремонтные работы. Бригады дорожного управления поменяют асфальтовое покрытие. Планируется обновление тротуаров прилегающих к ремонтируемым улицам'
-      ]
+    $posts = DB::select('select * from posts');
 
-    ];
     $post = $posts[$post_id];
     return view('posts.show', ['post' => $post]);
   }
@@ -71,17 +33,38 @@ class PostController extends Controller
   public function store(PostCreateRequest $request)
   {
     $title = $request->post('title');
-    $description = $request->post('description');
+    $text = $request->post('text');
+    DB::insert('insert into posts (title, text) value (:title, :text)', ['title' => $title, 'text' => $text]);
+
+    return redirect()->route('posts.index');
   }
 
-    public function edit()
+    public function update($post_id)
   {
-    return view('posts.edit');
+    $post = DB::select('select * from posts where id = :id', ['id' => $post_id]);
+  
+    return view('posts.update', ['post' => $post[0], 'post_id' => $post_id]);
   }
 
-    public function delete()
+  public function restore(PostCreateRequest $request, int $post_id)
   {
-    return view('posts.delete');
+    $title = $request->post('title');
+    $text = $request->post('text');
+    $affected = DB::insert("update posts set title = :title, text = :text where id = :id", [
+      'title' => $title, 
+      'text' => $text, 
+      'id' => $post_id
+    ]);
+    /* dd($post_id); */
+
+    return redirect()->route('posts.index');
+  }
+
+    public function delete($post_id)
+  {
+    DB::delete('delete from posts where id = :id', ['id' => $post_id]);
+
+    return redirect()->route('posts.index');
   }
 
 }

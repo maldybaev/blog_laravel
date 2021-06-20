@@ -5,7 +5,7 @@
 
 body {
   background-color:#fcfcfc;
-  background-image:url("{{asset('images/background.png')}}");
+  background-image:url(../images/background.png);
   background-repeat:repeat-x;
   font:12px "Trebuchet MS", Arial, Verdana;
   color:#555555;
@@ -40,7 +40,7 @@ p {
   }
 #header {
   height:200px;
-  background-image:url(images/header.png);
+  background-image:url(../images/header.png);
   background-repeat:no-repeat;
   margin-bottom:10px;
   }
@@ -49,7 +49,7 @@ p {
   text-align:left;
   width:150px;
   padding:10px;
-  background-image:url(images/bg-sidebar.gif);
+  background-image:url(../images/bg-sidebar.gif);
   border:1px solid #efefef;
   color:#666666;
   }
@@ -132,6 +132,9 @@ h3 a:hover {
   }
 .right {
   text-align: right;
+}
+.navbar-nav {
+  float: right;
 }
 
 /* Extra's */

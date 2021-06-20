@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/posts', 'HomeController@posts'); *Синтаксис до Laravel 8*
 /*Так как у меня установилась 8-версия Laravel, пришлось писать по новому синтаксису*/
 
+Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 use App\Http\Controllers\HomeController;  //Синтаксис для Laravel 8
 Route::get('/', [ HomeController::class, 'index' ]);
 Route::get('/aboutus', [ HomeController::class, 'aboutus' ]);
@@ -30,8 +33,9 @@ Route::group(['prefix' => '/posts'], function () {
     Route::get('/show/{post_id}', [ PostController::class, 'show' ])->name('posts.show');
     Route::get('/create', [ PostController::class, 'create' ])->name('posts.get.create');
     Route::post('/', [ PostController::class, 'store' ])->name('posts.post.create');
-    Route::get('/edit', [ PostController::class, 'edit' ]);
-    Route::get('/delete', [ PostController::class, 'delete' ]);
+    Route::get('/update/{post_id}', [ PostController::class, 'update' ])->name('posts.get.update');
+    Route::post('/update/{post_id}', [ PostController::class, 'restore' ])->name('posts.post.update');
+    Route::get('/delete/{post_id}', [ PostController::class, 'delete' ])->name('posts.delete');
 });
 
 
@@ -58,6 +62,7 @@ Route::get('/faq', [ FAQController::class, 'index' ]);
 Route::get('/faq/create', [ FAQController::class, 'create' ]);
 Route::get('/faq/edit', [ FAQController::class, 'edit' ]);
 Route::get('/faq/delete', [ FAQController::class, 'delete' ]);
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */

@@ -25,7 +25,7 @@
             <input type="text" name="title" placeholder="Введите заголовок"></p>
           <p>Текст новости:
             <br>
-            <textarea rows="10" cols="45" name="description" placeholder="Введите текст новости"></textarea></p>
+            <textarea rows="10" cols="45" name="text" placeholder="Введите текст новости"></textarea></p>
         <p>
         <input type="submit" name="submit" value="Разместить статью">
         </p>
