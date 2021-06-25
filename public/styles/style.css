@@ -44,7 +44,7 @@ p {
   background-repeat:no-repeat;
   margin-bottom:10px;
   }
-#sidebar {
+.sidebar {
   float:left;
   text-align:left;
   width:150px;

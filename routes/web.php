@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-use App\Http\Controllers\HomeController;  //Синтаксис для Laravel 8
+use App\Http\Controllers\HomeController;  
 Route::get('/', [ HomeController::class, 'index' ]);
 Route::get('/aboutus', [ HomeController::class, 'aboutus' ]);
 
@@ -38,24 +38,23 @@ Route::group(['prefix' => '/posts'], function () {
     Route::get('/delete/{post_id}', [ PostController::class, 'delete' ])->name('posts.delete');
 });
 
+use App\Http\Controllers\CategoryController;
+Route::get('/categories', [ CategoryController::class, 'index' ])->name('categories.index');
+Route::get('/categories/show/{category_id}', [ CategoryController::class, 'show' ])->name('categories.show');
+Route::get('/categories/create', [ CategoryController::class, 'create' ])->name('categories.get.create');
+Route::post('/categories', [ CategoryController::class, 'store' ])->name('categories.post.create');
+Route::get('/categories/update/{category_id}', [ CategoryController::class, 'update' ])->name('categories.get.update');
+Route::post('/categories/update/{category_id}', [ CategoryController::class, 'restore' ])->name('categories.post.update');
+Route::get('/categories/delete/{category_id}', [ CategoryController::class, 'delete' ])->name('categories.delete');
 
-use App\Http\Controllers\ProductController;
-  Route::group(['prefix' => '/products'], function() {
-  Route::get('/', [ ProductController::class, 'index' ])->name('products.index');
-  Route::get('/show/{product_id}', [ ProductController::class, 'show' ])->name('products.show');
-  Route::get('/create', [ ProductController::class, 'create' ])->name('products.get.create');
-  Route::post('/store', [ ProductController::class, 'store' ])->name('products.post.create');
-  Route::get('/edit', [ ProductController::class, 'edit' ]);
-  Route::get('/delete', [ ProductController::class, 'delete' ]);
-});
-
-use App\Http\Controllers\UserController;
+/* use App\Http\Controllers\UserController;
 Route::get('/users/login', [ UserController::class, 'login' ])->name('users.get.login');
 Route::post('/users/profile', [ UserController::class, 'profile' ])->name('users.post.profile');
 Route::get('/users/reg', [ UserController::class, 'reg' ])->name('users.get.reg');
 Route::post('/users/store', [ UserController::class, 'store' ])->name('users.post.reg');
 Route::get('/users/edit', [ UserController::class, 'edit' ]);
 Route::get('/users/delete', [ UserController::class, 'delete' ]);
+ */
 
 use App\Http\Controllers\FAQController;
 Route::get('/faq', [ FAQController::class, 'index' ]);
