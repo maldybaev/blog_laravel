@@ -27,7 +27,7 @@
             <br>
             <textarea rows="10" cols="45" name="text" placeholder="Введите текст новости"></textarea></p>
         <p>
-        <input type="submit" name="submit" value="Разместить статью">
+        <input type="submit" value="Разместить статью">
         </p>
       </form>
  @endsection

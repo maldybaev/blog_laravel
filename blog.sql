@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 25 2021 г., 12:06
+-- Время создания: Июл 01 2021 г., 09:07
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 8.0.2
 
@@ -98,8 +98,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `text`, `created_at`, `updated_at`, `status`) VALUES
-(5, 'Новость номер семь', 'Седьмая отличная новость 7', NULL, NULL, 'unpublish'),
-(7, 'Отличная новость', 'Очередная новость', NULL, NULL, 'unpublish');
+(5, 'Новость номер восемь', 'Восьмая отличная новость 8', NULL, '2021-06-30 13:56:56', 'unpublish'),
+(7, 'Отличная новость', 'Очередная новость', NULL, NULL, 'unpublish'),
+(9, 'В Кыргызстан приехали представители Илона Маска', 'В Кыргызстан приехали представители Илона Маска для переговоров', '2021-06-30 14:13:23', '2021-06-30 14:13:23', 'unpublish'),
+(10, 'Увеличивается количество заболевших', 'Увеличивается количество заболевших коронавирусом.', '2021-07-01 00:02:15', '2021-07-01 00:02:15', 'unpublish');
 
 -- --------------------------------------------------------
 
@@ -177,7 +179,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
