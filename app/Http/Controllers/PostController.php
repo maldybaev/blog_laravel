@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function show($post_id)
   {
-    $post = Post::findOrFail($post_id);
+    $post = Post::where('id', $post_id)->with('comments')->first();
     $categories = Category::get();
 
     return view('posts.show', ['post' => $post, 'categories' => $categories]);

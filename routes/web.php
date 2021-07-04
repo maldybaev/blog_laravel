@@ -38,6 +38,14 @@ Route::group(['prefix' => '/posts'], function () {
     Route::get('/delete/{post_id}', [ PostController::class, 'delete' ])->name('posts.delete');
 });
 
+use App\Http\Controllers\CommentController;
+Route::group(['prefix' => '/comments'], function () {
+    Route::post('/', [ CommentController::class, 'store' ])->name('comments.create');
+    Route::get('/update/{comment_id}', [ CommentController::class, 'update' ])->name('comments.get.update');
+    Route::post('/update/{comment_id}', [ CommentController::class, 'restore' ])->name('comments.post.update');
+    Route::get('/delete/{comment_id}/{post_id}', [ CommentController::class, 'delete' ])->name('comments.delete');
+});
+
 use App\Http\Controllers\CategoryController;
 Route::get('/categories', [ CategoryController::class, 'index' ])->name('categories.index');
 Route::get('/categories/show/{category_id}', [ CategoryController::class, 'show' ])->name('categories.show');
@@ -47,21 +55,29 @@ Route::get('/categories/update/{category_id}', [ CategoryController::class, 'upd
 Route::post('/categories/update/{category_id}', [ CategoryController::class, 'restore' ])->name('categories.post.update');
 Route::get('/categories/delete/{category_id}', [ CategoryController::class, 'delete' ])->name('categories.delete');
 
+use App\Http\Controllers\UserController;
+Route::group(['prefix' => '/users'], function () {
+    Route::get('/', [ UserController::class, 'index' ])->name('users.index');
+    Route::get('/show/{user_id}', [ UserController::class, 'show' ])->name('users.show');
+    Route::get('/create', [ UserController::class, 'create' ])->name('users.get.create');
+    Route::post('/', [ UserController::class, 'store' ])->name('users.post.create');
+    Route::get('/update/{user_id}', [ UserController::class, 'update' ])->name('users.get.update');
+    Route::post('/update/{user_id}', [ UserController::class, 'restore' ])->name('users.post.update');
+    Route::get('/delete/{user_id}', [ UserController::class, 'delete' ])->name('users.delete');
+});
+
 /* use App\Http\Controllers\UserController;
+Route::get('/users', [ UserController::class, 'index' ])->name('users.index');
 Route::get('/users/login', [ UserController::class, 'login' ])->name('users.get.login');
 Route::post('/users/profile', [ UserController::class, 'profile' ])->name('users.post.profile');
 Route::get('/users/reg', [ UserController::class, 'reg' ])->name('users.get.reg');
 Route::post('/users/store', [ UserController::class, 'store' ])->name('users.post.reg');
 Route::get('/users/edit', [ UserController::class, 'edit' ]);
-Route::get('/users/delete', [ UserController::class, 'delete' ]);
- */
+Route::get('/users/delete', [ UserController::class, 'delete' ]); */
+
 
 use App\Http\Controllers\FAQController;
 Route::get('/faq', [ FAQController::class, 'index' ]);
 Route::get('/faq/create', [ FAQController::class, 'create' ]);
 Route::get('/faq/edit', [ FAQController::class, 'edit' ]);
 Route::get('/faq/delete', [ FAQController::class, 'delete' ]);
-
-
-/* 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */
