@@ -20,12 +20,22 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/posts', 'HomeController@posts'); *Синтаксис до Laravel 8*
 /*Так как у меня установилась 8-версия Laravel, пришлось писать по новому синтаксису*/
 
-Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); */
 
 use App\Http\Controllers\HomeController;  
-Route::get('/', [ HomeController::class, 'index' ]);
+Route::get('/', [ HomeController::class, 'index' ])->name('main');
 Route::get('/aboutus', [ HomeController::class, 'aboutus' ]);
+
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+Route::group(['prefix' => '/auth'], function () {
+    Route::get('/registration', [ RegisterController::class, 'getRegister' ])->name('auth.get.register');
+    Route::post('/registration', [ RegisterController::class, 'postRegister' ])->name('auth.post.register');
+    Route::get('/login', [ LoginController::class, 'getLogin' ])->name('auth.get.login');
+    Route::post('/login', [ LoginController::class, 'postLogin' ])->name('auth.post.login');
+    Route::get('/logout', [ LoginController::class, 'Logout' ])->name('auth.logout');
+});
 
 use App\Http\Controllers\PostController;
 Route::group(['prefix' => '/posts'], function () {
@@ -55,7 +65,7 @@ Route::get('/categories/update/{category_id}', [ CategoryController::class, 'upd
 Route::post('/categories/update/{category_id}', [ CategoryController::class, 'restore' ])->name('categories.post.update');
 Route::get('/categories/delete/{category_id}', [ CategoryController::class, 'delete' ])->name('categories.delete');
 
-use App\Http\Controllers\UserController;
+/* use App\Http\Controllers\UserController;
 Route::group(['prefix' => '/users'], function () {
     Route::get('/', [ UserController::class, 'index' ])->name('users.index');
     Route::get('/show/{user_id}', [ UserController::class, 'show' ])->name('users.show');
@@ -64,7 +74,7 @@ Route::group(['prefix' => '/users'], function () {
     Route::get('/update/{user_id}', [ UserController::class, 'update' ])->name('users.get.update');
     Route::post('/update/{user_id}', [ UserController::class, 'restore' ])->name('users.post.update');
     Route::get('/delete/{user_id}', [ UserController::class, 'delete' ])->name('users.delete');
-});
+}); */
 
 /* use App\Http\Controllers\UserController;
 Route::get('/users', [ UserController::class, 'index' ])->name('users.index');

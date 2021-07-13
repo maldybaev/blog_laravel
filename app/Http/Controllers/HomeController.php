@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
   {
-    $news = [
+    /* $news = [
       [
         'title' => 'Добро пожаловать',
         'author' => 'Admin',
@@ -38,8 +39,12 @@ class HomeController extends Controller
         'description' => 'Тестовая новость. Тестируем вывод новостей'
       ]
 
-    ];
-    return view('home.index', ['news' => $news]);
+    ]; */
+
+    if (Auth::check()) {
+      return redirect()->route('posts.index');
+    }
+    return redirect()->route('auth.get.login');
   }
 
     public function aboutus()

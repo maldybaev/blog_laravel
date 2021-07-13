@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июл 04 2021 г., 07:08
+-- Время создания: Июл 13 2021 г., 19:37
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 8.0.2
 
@@ -65,7 +65,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `post_id`, `text`, `created_at`, `updated_at`) VALUES
 (1, 5, 'Мой первый комментарий', '2021-07-03 22:17:31', '2021-07-03 22:17:31'),
 (2, 5, 'My second comment', '2021-07-03 22:32:31', '2021-07-03 22:32:31'),
-(3, 5, 'Третий комментарий', '2021-07-03 22:37:25', '2021-07-03 22:37:25');
+(3, 5, 'Третий комментарий', '2021-07-03 22:37:25', '2021-07-03 22:37:25'),
+(6, 7, 'Test', '2021-07-13 08:20:16', '2021-07-13 08:20:16');
 
 -- --------------------------------------------------------
 
@@ -174,7 +175,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `age`, `city`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Асан', 'Азаматов', 32, 'Bishkek', 'asan@gmail.com', NULL, '12345678', NULL, NULL, NULL);
+(1, 'Асан', 'Азаматов', 32, 'Bishkek', 'asan@gmail.com', NULL, '12345678', NULL, NULL, NULL),
+(3, 'Tester', 'Testman', 26, 'Bishkek', 'test@gmail.com', NULL, '$2y$10$u/CU6JhZmys8/APIk/HTBOWA2MypchQPSLSxdugW9pZm9zpOqjQiC', NULL, '2021-07-13 04:15:28', '2021-07-13 04:15:28'),
+(4, 'Cooler', 'Coolman', 36, 'Bishkek', 'cool@gmail.com', NULL, '$2y$10$BT9E9b0gb78cFgDGslCm/O6MXq/BHHrlKQwC7css4qqxpd4QdAj9i', NULL, '2021-07-13 10:47:35', '2021-07-13 10:47:35');
 
 --
 -- Индексы сохранённых таблиц
@@ -237,7 +240,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `migrations`
@@ -261,7 +264,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

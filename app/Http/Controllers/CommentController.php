@@ -15,6 +15,7 @@ class CommentController extends Controller
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
+        $this->middleware('auth');
     }
 
     public function store(Request $request)
