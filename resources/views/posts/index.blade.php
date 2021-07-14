@@ -13,6 +13,10 @@
     <div>
       <h1><a href="{{ route('posts.show', ['post_id' => $post->id]) }}">{{ $post->title }}</a></h1>
       <br>
+      <div>
+        <img src="/storage/{{ $post->photo }}" height="200">
+      </div>
+      <br>
       <p>{{ $post->text }}</p>
       <div>
         <a href="{{ route('posts.get.update', ['post_id' => $post->id]) }}">Редактировать</a>

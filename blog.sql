@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июл 13 2021 г., 19:37
+-- Время создания: Июл 14 2021 г., 15:25
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 8.0.2
 
@@ -90,7 +90,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2021_06_18_060554_create_posts_table', 1),
 (4, '2021_06_24_121506_create_categories_table', 2),
 (5, '2021_07_03_132921_create_phones_table', 3),
-(6, '2021_07_03_152540_create_comments_table', 4);
+(6, '2021_07_03_152540_create_comments_table', 4),
+(7, '2021_07_14_070758_add_photo_column_to_posts_table', 5);
 
 -- --------------------------------------------------------
 
@@ -135,6 +136,7 @@ CREATE TABLE `posts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` enum('publish','unpublish') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'unpublish'
@@ -144,11 +146,12 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `text`, `created_at`, `updated_at`, `status`) VALUES
-(5, 'Новость номер восемь', 'Восьмая отличная новость 8', NULL, '2021-06-30 13:56:56', 'unpublish'),
-(7, 'Отличная новость', 'Очередная новость', NULL, NULL, 'unpublish'),
-(9, 'В Кыргызстан приехали представители Илона Маска', 'В Кыргызстан приехали представители Илона Маска для переговоров', '2021-06-30 14:13:23', '2021-06-30 14:13:23', 'unpublish'),
-(10, 'Увеличивается количество заболевших', 'Увеличивается количество заболевших коронавирусом.', '2021-07-01 00:02:15', '2021-07-01 00:02:15', 'unpublish');
+INSERT INTO `posts` (`id`, `title`, `text`, `photo`, `created_at`, `updated_at`, `status`) VALUES
+(5, 'Новость номер восемь', 'Восьмая отличная новость 8', '', NULL, '2021-06-30 13:56:56', 'unpublish'),
+(7, 'Отличная новость', 'Очередная новость', '', NULL, NULL, 'unpublish'),
+(9, 'В Кыргызстан приехали представители Илона Маска', 'В Кыргызстан приехали представители Илона Маска для переговоров', '', '2021-06-30 14:13:23', '2021-06-30 14:13:23', 'unpublish'),
+(10, 'Увеличивается количество заболевших', 'Увеличивается количество заболевших коронавирусом.', '', '2021-07-01 00:02:15', '2021-07-01 00:02:15', 'unpublish'),
+(13, 'Все хорошо', 'Будет еще лучше', 'posts/gGzAHfw2nXteQsleck4veknj63jsPLahvirFRrza.png', '2021-07-14 06:22:24', '2021-07-14 06:22:24', 'unpublish');
 
 -- --------------------------------------------------------
 
@@ -246,7 +249,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `phones`
@@ -258,7 +261,7 @@ ALTER TABLE `phones`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

@@ -18,7 +18,7 @@
       @endif
       <br>
       <br>
-      <form action="{{ route('posts.post.create') }}" method="post">
+      <form action="{{ route('posts.post.create') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
           <p>Заголовок новости:
             <br>
@@ -26,6 +26,10 @@
           <p>Текст новости:
             <br>
             <textarea rows="10" cols="45" name="text" placeholder="Введите текст новости"></textarea></p>
+            <div>
+              <input type="file" name="photo">
+            </div>
+            <br>
         <p>
         <input type="submit" value="Разместить статью">
         </p>

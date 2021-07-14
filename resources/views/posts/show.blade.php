@@ -9,6 +9,10 @@
     <div class="item">
         <div><h2>{{ $post->title }}</h2></div>
         <br>
+        <div>
+            <img src="/storage/{{ $post->photo }}" height="500">
+        </div>
+        <br>
         <div> {{ $post->text }}</div>
     </div>
     <div>

@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -43,6 +44,9 @@ class PostController extends Controller
   {
     $post_data = $request->all();
 
+    //$post_data['photo'] = $request->file('photo')->store('posts', 'public');
+    $post_data['photo'] = Storage::disk('public')->putFile('posts', $request->file('photo'));
+
     Post::create($post_data);
     
     return redirect()->route('posts.index');
@@ -69,11 +73,13 @@ class PostController extends Controller
 
     public function delete($post_id)
   {
-    /* $post = Post::findOrFail($post_id);
+    $post = Post::findOrFail($post_id);
 
-    $post->delete(); */
+    Storage::disk('public')->delete($post->photo);
 
-    Post::destroy($post_id);
+    $post->delete();
+
+    /* Post::destroy($post_id); */
 
     return redirect()->route('posts.index');
   }
